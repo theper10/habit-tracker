@@ -27,7 +27,7 @@ namespace HabitTracker.Services
         public void AddHabit()
         {
             Console.Write("Enter habit name: ");
-            string newHabitName = Console.ReadLine().Trim();
+            string newHabitName = (Console.ReadLine() ?? "").Trim();
 
             if (String.IsNullOrWhiteSpace(newHabitName))
             {
