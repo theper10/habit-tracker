@@ -1,10 +1,14 @@
-﻿namespace HabitTracker
+﻿using HabitTracker.Services;
+using HabitTracker.Menus;
+
+namespace HabitTracker
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            HabitMenu habitMenu = new();
+            habitMenu.ShowMenu();
         }
     }
 }
