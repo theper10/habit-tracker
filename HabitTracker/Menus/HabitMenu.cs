@@ -7,7 +7,7 @@ namespace HabitTracker.Menus
 {
     internal class HabitMenu
     {
-        HabitService habitService = new();
+        private HabitService habitService = new();
         public void ShowMenu()
         {
             bool running = true;
@@ -34,7 +34,7 @@ namespace HabitTracker.Menus
                         Console.WriteLine("Completing habits");
                         break;
                     case "4":
-                        Console.WriteLine("Removing habit");
+                        habitService.RemoveHabit();
                         break;
                     case "5":
                         Console.WriteLine("Application closing..");
