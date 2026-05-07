@@ -49,7 +49,7 @@ namespace HabitTracker.Services
             }
 
             Console.Write("Enter the ID of the habit you want to remove: ");
-            string input = Console.ReadLine().Trim();
+            string input = (Console.ReadLine() ?? "").Trim();
 
             if (!int.TryParse(input, out int id))
             {
@@ -57,7 +57,7 @@ namespace HabitTracker.Services
                 return;
             }
 
-            Habit habitToRemove = habits.FirstOrDefault(habit => habit.Id == id);
+            Habit? habitToRemove = habits.FirstOrDefault(habit => habit.Id == id);
 
             if (habitToRemove == null)
             {
@@ -71,7 +71,35 @@ namespace HabitTracker.Services
 
         public void CompleteHabit()
         {
+            foreach (Habit habit in habits)
+            {
+                string status = habit.isCompleted ? "[X]" : "[ ]";
+                Console.WriteLine($"{habit.Id}. {status} {habit.Name}");
+            }
 
+            Console.Write("Enter the ID of the habit you want to complete: ");
+            string input = (Console.ReadLine() ?? "").Trim();
+
+            if (!int.TryParse(input, out int id))
+            {
+                Console.WriteLine("Invalid input.");
+                return;
+            }
+
+            Habit? habitToComplete = habits.FirstOrDefault(habit => habit.Id == id);
+
+            if (habitToComplete == null)
+            {
+                Console.WriteLine("Habit not found.");
+                return;
+            }
+            else if (habitToComplete.isCompleted == true)
+            {
+                Console.WriteLine("Habit is already completed!");
+            }
+
+            habitToComplete.isCompleted = true;
+            Console.WriteLine("Habit completed!");
         }
     }
 }
