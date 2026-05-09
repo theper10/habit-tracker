@@ -12,16 +12,11 @@ namespace HabitTracker.Services
 
         public void ViewHabits()
         {
-            if (habits.Count == 0)
+            if (HasNoHabits())
             {
-                Console.WriteLine("No habits found.");
+                return;
             }
-
-            foreach (Habit habit in habits)
-            {
-                string status = habit.IsCompleted ? "[X]" : "[ ]";
-                Console.WriteLine($"{habit.Id}. {status} {habit.Name}");
-            }
+            PrintHabits();
         }
 
         public void AddHabit()
@@ -38,15 +33,17 @@ namespace HabitTracker.Services
             Habit habit = new Habit(nextId, newHabitName);
             habits.Add(habit);
             nextId++;
+
+            Console.WriteLine($"Habit {newHabitName} added!");
         }
 
         public void RemoveHabit()
         {
-            foreach (Habit habit in habits)
+            if (HasNoHabits())
             {
-                string status = habit.IsCompleted ? "[X]" : "[ ]";
-                Console.WriteLine($"{habit.Id}. {status} {habit.Name}");
+                return;
             }
+            PrintHabits();
 
             Console.Write("Enter the ID of the habit you want to remove: ");
             string input = (Console.ReadLine() ?? "").Trim();
@@ -71,11 +68,11 @@ namespace HabitTracker.Services
 
         public void CompleteHabit()
         {
-            foreach (Habit habit in habits)
+            if (HasNoHabits())
             {
-                string status = habit.IsCompleted ? "[X]" : "[ ]";
-                Console.WriteLine($"{habit.Id}. {status} {habit.Name}");
+                return;
             }
+            PrintHabits();
 
             Console.Write("Enter the ID of the habit you want to complete: ");
             string input = (Console.ReadLine() ?? "").Trim();
@@ -93,6 +90,7 @@ namespace HabitTracker.Services
                 Console.WriteLine("Habit not found.");
                 return;
             }
+
             else if (habitToComplete.IsCompleted == true)
             {
                 Console.WriteLine("Habit is already completed!");
@@ -101,6 +99,25 @@ namespace HabitTracker.Services
 
             habitToComplete.IsCompleted = true;
             Console.WriteLine("Habit completed!");
+        }
+
+        private void PrintHabits()
+        {
+            foreach (Habit habit in habits)
+            {
+                string status = habit.IsCompleted ? "[X]" : "[ ]";
+                Console.WriteLine($"{habit.Id}. {status} {habit.Name}");
+            }
+        }
+        
+        private bool HasNoHabits()
+        {
+            if (habits.Count == 0)
+            {
+                Console.WriteLine("No habits found.");
+                return true;
+            }
+            return false;
         }
     }
 }
