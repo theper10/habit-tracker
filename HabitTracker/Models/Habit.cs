@@ -8,13 +8,13 @@ namespace HabitTracker.Models
     {
         public int Id { get; set; }
         public string Name { get; set; } = "";
-        public bool isCompleted { get; set; }
+        public bool IsCompleted { get; set; }
 
         public Habit (int id, string name)
         {
             Id = id;
             Name = name;
-            isCompleted = false;
+            IsCompleted = false;
         }
     }
 }

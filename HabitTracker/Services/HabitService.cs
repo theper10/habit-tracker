@@ -19,7 +19,7 @@ namespace HabitTracker.Services
 
             foreach (Habit habit in habits)
             {
-                string status = habit.isCompleted ? "[X]" : "[ ]";
+                string status = habit.IsCompleted ? "[X]" : "[ ]";
                 Console.WriteLine($"{habit.Id}. {status} {habit.Name}");
             }
         }
@@ -44,7 +44,7 @@ namespace HabitTracker.Services
         {
             foreach (Habit habit in habits)
             {
-                string status = habit.isCompleted ? "[X]" : "[ ]";
+                string status = habit.IsCompleted ? "[X]" : "[ ]";
                 Console.WriteLine($"{habit.Id}. {status} {habit.Name}");
             }
 
@@ -73,7 +73,7 @@ namespace HabitTracker.Services
         {
             foreach (Habit habit in habits)
             {
-                string status = habit.isCompleted ? "[X]" : "[ ]";
+                string status = habit.IsCompleted ? "[X]" : "[ ]";
                 Console.WriteLine($"{habit.Id}. {status} {habit.Name}");
             }
 
@@ -93,12 +93,13 @@ namespace HabitTracker.Services
                 Console.WriteLine("Habit not found.");
                 return;
             }
-            else if (habitToComplete.isCompleted == true)
+            else if (habitToComplete.IsCompleted == true)
             {
                 Console.WriteLine("Habit is already completed!");
+                return;
             }
 
-            habitToComplete.isCompleted = true;
+            habitToComplete.IsCompleted = true;
             Console.WriteLine("Habit completed!");
         }
     }
