@@ -18,7 +18,8 @@ namespace HabitTracker.Menus
                 Console.WriteLine("2. Add habit");
                 Console.WriteLine("3. Complete habit");
                 Console.WriteLine("4. Remove habit");
-                Console.WriteLine("5. Exit");
+                Console.WriteLine("5. Edit habit name");
+                Console.WriteLine("6. Exit");
                 Console.Write("Choose an option: ");
                 string menuChoice = (Console.ReadLine() ?? "").Trim();
 
@@ -37,6 +38,9 @@ namespace HabitTracker.Menus
                         habitService.RemoveHabit();
                         break;
                     case "5":
+                        habitService.EditHabit();
+                        break;
+                    case "6":
                         Console.WriteLine("Application closing..");
                         running = false;
                         break;

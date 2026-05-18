@@ -119,5 +119,42 @@ namespace HabitTracker.Services
             }
             return false;
         }
+
+        public void EditHabit()
+        {
+            if (HasNoHabits())
+            {
+                return;
+            }
+            PrintHabits();
+
+            Console.Write("Enter the ID of the habit name you want to edit: ");
+            string input = (Console.ReadLine() ?? "").Trim();
+
+            if (!int.TryParse(input, out int id))
+            {
+                Console.WriteLine("Invalid input.");
+                return;
+            }
+
+            Habit? habitToEdit = habits.FirstOrDefault(habit => habit.Id == id);
+
+            if (habitToEdit == null)
+            {
+                Console.WriteLine("Habit not found.");
+                return;
+            }
+
+            Console.Write("Enter the new name of your habit: ");
+            habitToEdit.Name = (Console.ReadLine() ?? "").Trim();
+
+            if (String.IsNullOrWhiteSpace(habitToEdit.Name))
+            {
+                Console.WriteLine("Habit name cannot be empty.");
+                return;
+            }
+
+            Console.WriteLine($"Habit {habitToEdit.Name} updated!");
+        }
     }
 }
